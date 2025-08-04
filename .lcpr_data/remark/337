@@ -1,0 +1,1 @@
+{"data":[{"name":"2025-03-06 10:36:54","id":1741257414081,"body":"经典的后续遍历, 这里需要增加的内容是最后的时候节点得自带左右子节点的 偷和不偷两个的值, 然后根据当前节点偷 和 不偷做计算, 偷就 val + leftNotRob + rightNotRob 不偷就是 max(leftRob, leftNotRob) + max(rightRob, rightNotRob) "}]}

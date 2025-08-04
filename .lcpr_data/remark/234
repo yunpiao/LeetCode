@@ -1,0 +1,1 @@
+{"data":[{"name":"2025-02-25 10:50:45","id":1740480645573,"body":"\t// 反转链表\n\tvar tmp *ListNode //  重点, 这个应该是空指针\n\tfor fast != nil {\n\t\tnext := fast.Next\n\t\tfast.Next = tmp\n\t\ttmp = fast\n\t\tfast = next\n\t}"}]}
