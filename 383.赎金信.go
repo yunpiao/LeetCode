@@ -7,18 +7,20 @@
 
 // @lc code=start
 func canConstruct(ransomNote string, magazine string) bool {
-	letterCount := [26]int{}
+	set := [26]int{}
 
-	for _, m := range magazine {
-		letterCount[m-'a']++
+	for _, v := range magazine {
+		set[v-'a']++
 	}
 
-	for _, r := range ransomNote {
-		letterCount[r-'a']--
-		if letterCount[r-'a'] < 0 {
+	for _, v := range ransomNote {
+		set[v-'a']--
+		if set[v-'a'] < 0 {
 			return false
 		}
 	}
+	
+
 	return true
 }
 

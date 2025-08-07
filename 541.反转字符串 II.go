@@ -4,25 +4,27 @@
  *
  * [541] 反转字符串 II
  */
+package main
 
 // @lc code=start
 func reverseStr(s string, k int) string {
-	n := len(s)
-	bytes := []byte(s)
+	buffer := []byte(s)
 
-	for i := 0; i < n; i = i + 2*k {
-		start := i
-		// 	特殊场景在这里体现
-		end := min(i+k-1, n-1)
-		//双指针反转
-		for start < end {
-			bytes[start], bytes[end] = bytes[end], bytes[start]
-			start++
-			end--
-		}
+	n := len(buffer)
+
+	// 单步 2k
+	for i:=0; i<n; i=i+2*k {
+		end := min(i+k, n) // 异常情况
+		_reverseStr(buffer[i:end]) // 直接反转, 不要参数
 	}
-	return string(bytes)
-
+	return string(buffer)
+}
+// 单独的函数用于反转字符串
+func _reverseStr(bytes []byte) {
+	n := len(bytes)
+	for i:=0; i<n/2; i++ {
+		bytes[i], bytes[n-i-1] = bytes[n-i-1], bytes[i]
+	}
 }
 
 // @lc code=end
@@ -33,7 +35,7 @@ func reverseStr(s string, k int) string {
 // @lcpr case=end
 
 // @lcpr case=start
-// "abcd"\n2\n
+// "abcd"\n8\n
 // @lcpr case=end
 
 */

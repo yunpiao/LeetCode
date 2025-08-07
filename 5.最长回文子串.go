@@ -4,45 +4,46 @@
  *
  * [5] 最长回文子串
  */
+package main
 
 // @lcpr-template-start
 
 // @lcpr-template-end
 // @lc code=start
 func longestPalindrome(s string) string {
-	// 中心扩展法, 每次遍历都作为回文的中心节点去探索, 每次探索和记录值进行比对
-	n := len(s)
-	if n == 0 {
-		return ""
-	}
-	ret := s[0:1]
-	maxLength := 1
-
-	// 闭包处理, 代码回更加清晰, 但是这种用法会破坏可读性
-	huiwen := func(left, right int) {
-		for left >= 0 && right < n && s[left] == s[right] {
-			left--
-			right++
+	// 目标, 找出最长的子串
+	// 逐个遍历, 中心扩展, 找到最长的子串
+	ret := ""
+	for i:=0; i<len(s); i++{
+		palindrome := getPalindrome(s, i, i)
+		if len(palindrome) > len(ret) {
+			ret = palindrome
 		}
-
-		if right-left+1 > maxLength {
-			maxLength = right - left + 1
-			ret = s[left+1 : right]
+		palindrome = getPalindrome(s, i, i+1)
+		if len(palindrome) > len(ret) {
+			ret = palindrome
 		}
-	}
-
-	for i := 0; i < n; i++ {
-		huiwen(i, i)
-		huiwen(i, i+1)
 	}
 	return ret
+}
+
+// 找到最大的回文子串, 有两种情况, 中心为基数或者中心为偶数
+func getPalindrome(s string, start, end int) string{
+	if end >= len(s) {
+		return ""
+	}
+	for start >= 0 && end < len(s) && s[start] == s[end]{
+			start--
+			end++
+	}
+	return s[start+1:end]
 }
 
 // @lc code=end
 
 /*
 // @lcpr case=start
-// "babad"\n
+// "aacabdkacaa"\n
 // @lcpr case=end
 
 // @lcpr case=start

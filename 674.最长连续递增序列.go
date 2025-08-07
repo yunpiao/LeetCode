@@ -7,24 +7,37 @@
 
 // @lc code=start
 func findLengthOfLCIS(nums []int) int {
-	if len(nums) <= 1 {
-		return len(nums)
-	}
-	ret := 0
-	dp := 1
-
-	// 贪心和动态规划的优化算法是一致的
-	
-
-	for i := 1; i < len(nums); i++ {
+	// 直接计算就可以, 也可以看做 dp[i] = dp[i-1]+1(递增) / 1 (不递增)
+	curr, ret := 1, 1
+	for i:=1; i<len(nums); i++{
 		if nums[i] > nums[i-1] {
-			dp = dp + 1
+			curr++
 		} else {
-			dp = 1
+			curr=1
 		}
-		ret = max(ret, dp)
+		ret = max(ret, curr)
 	}
 	return ret
+
+
+	// if len(nums) <= 1 {
+	// 	return len(nums)
+	// }
+	// ret := 0
+	// dp := 1
+
+	// // 贪心和动态规划的优化算法是一致的
+	
+
+	// for i := 1; i < len(nums); i++ {
+	// 	if nums[i] > nums[i-1] {
+	// 		dp = dp + 1
+	// 	} else {
+	// 		dp = 1
+	// 	}
+	// 	ret = max(ret, dp)
+	// }
+	// return ret
 
 }
 

@@ -7,33 +7,25 @@
 
 // @lc code=start
 func isAnagram(s string, t string) bool {
-	// 根据长度比较
 	if len(s) != len(t) {
-		return false
+		return false 
 	}
-	if len(s) == 0 {
-		return true
-	}
-
-	// 通过字典统计每个字符的数据量
-	letterCount := [26]int{}
-	for _, c := range s {
-		letterCount[c-'a']++
+	
+	set := [26]int{}
+	// 累加字符计数
+	for _, v := range s {
+		set[v-'a']++
 	}
 
-	for _, c := range t {
-		letterCount[c-'a']--
-		// 提前返回
-		if letterCount[c-'a'] < 0 {
+	// 逐步减少字符计数
+	for _, v := range t {
+		set[v-'a']--
+		// 如果发现异常提前退出
+		if set[v-'a'] < 0{
 			return false
 		}
 	}
-
-	for _, count := range letterCount {
-		if count != 0 {
-			return false
-		}
-	}
+	
 	return true
 }
 

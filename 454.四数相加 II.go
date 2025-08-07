@@ -8,24 +8,24 @@ package main
 
 // @lc code=start
 func fourSumCount(nums1 []int, nums2 []int, nums3 []int, nums4 []int) int {
-	// 因为是 4 个, 所以可以使用两数之和类似的, 先同统计 nums1 nums2 的任意两数之和
-	numsCount := make(map[int]int, len(nums1))
+	// 只需要计算出数量, 所以核心的算法是 4 合并为 2, 前两个计算出target , 后两个匹配, 有的话就累加
+	ret := 0
+	set := make(map[int]int, len(nums1)+len(nums2))
 	for _, n1 := range nums1 {
 		for _, n2 := range nums2 {
-			numsCount[n1+n2]++
+			set[n1+n2]++
 		}
 	}
 
-	result := 0
 	for _, n3 := range nums3 {
 		for _, n4 := range nums4 {
-			if v, exist := numsCount[-(n3 + n4)]; exist {
-				result += v
+			// 发现 target, 就计数
+			if count, exist := set[0-n3-n4]; exist {
+				ret += count 
 			}
 		}
 	}
-
-	return result
+	return ret 
 }
 
 // @lc code=end

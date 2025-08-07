@@ -7,22 +7,19 @@
 
 // @lc code=start
 func lengthOfLastWord(s string) int {
-	startSpace := true
-	count := 0
-	for i := len(s) - 1; i >= 0; i-- {
-		if startSpace && s[i] == ' ' {
-			continue
-		}
-		startSpace = false
+	n := len(s)
+	ret := 0
+	for i:=n-1; i>=0; i-- {
 		if s[i] == ' ' {
-			return count
-		} else {
-			count++
+			if ret == 0 {
+				continue
+			} else {
+				break
+			}
 		}
-
+		ret++
 	}
-	return count
-
+	return ret
 }
 
 // @lc code=end

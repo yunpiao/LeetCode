@@ -6,7 +6,7 @@
  */
 package main
 
-import "strings"
+import "fmt"
 
 // @lc code=start
 func rotateString(s string, goal string) bool {
@@ -16,8 +16,13 @@ func rotateString(s string, goal string) bool {
 	if s == goal {
 		return true
 	}
-	ss := s + s
-	return strings.Contains(ss, goal)
+	for i:=0; i<len(s); i++ {
+		if s[i:len(s)] == goal[:len(s)-i] && 
+		s[:i] == goal[len(s)-i:] {
+			return true
+		}
+	}
+	return false
 
 }
 

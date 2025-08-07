@@ -7,8 +7,15 @@
 
 // @lc code=start
 func climbStairs(n int) int {
-	// 动态规划, 完全背包问题, 0 1 可以无限的取, 同时求的是组合数量
-	//
+	// if n <= 1 { return n }
+	// dp1, dp2 := 1, 1
+	// 精简二维 dp 后的版本
+	// for i:=2; i<n+1; i++ {
+	// 	dp2, dp1 = dp1 + dp2, dp2
+	// }
+	// return dp2
+	// 排列问题, 使用 1 和 2 填充 n 有多少种排列方式
+	// 完全背包, 填满这个背包, 有多少种排列方法
 	if n == 0 {
 		return 0
 	}

@@ -4,31 +4,55 @@
  *
  * [300] 最长递增子序列
  */
+package main
 
 // @lc code=start
 func lengthOfLIS(nums []int) int {
-	// dp 的定义比较难, 定义 dp是以当前 i 结尾的递增序列
-	// 最后再使用 max 得到最大的子序列长度
-	// 初始化 dp 数组, 每个元素初始化为 1, 因为每个元素本身就是一个长度为 1 的递增序列
+	// dp[i] = max(dp[i-k] k from 0 -> i-1, if nums[i-k] < nums[i])
 
-	if len(nums) <= 1 {
-		return len(nums)
-	}
 	dp := make([]int, len(nums))
-	for i := 0; i < len(nums); i++ {
+	for i := range dp {
 		dp[i] = 1
 	}
-	ret := 0
-	for i := 1; i < len(nums); i++ {
-		for j := 0; j < i; j++ {
-			if nums[i] > nums[j] {
-				dp[i] = max(dp[i], dp[j]+1)
+
+	ret := 1
+	for i, v := range nums {
+		for k:=0; k<i; k++{
+			lastV := nums[k]
+			if lastV < v {
+				dp[i] = max(dp[k]+1, dp[i])
+				
 			}
 		}
 		ret = max(ret, dp[i])
 	}
-
 	return ret
+
+
+
+
+	// dp 的定义比较难, 定义 dp是以当前 i 结尾的递增序列
+	// 最后再使用 max 得到最大的子序列长度
+	// 初始化 dp 数组, 每个元素初始化为 1, 因为每个元素本身就是一个长度为 1 的递增序列
+
+	// if len(nums) <= 1 {
+	// 	return len(nums)
+	// }
+	// dp := make([]int, len(nums))
+	// for i := 0; i < len(nums); i++ {
+	// 	dp[i] = 1
+	// }
+	// ret := 0
+	// for i := 1; i < len(nums); i++ {
+	// 	for j := 0; j < i; j++ {
+	// 		if nums[i] > nums[j] {
+	// 			dp[i] = max(dp[i], dp[j]+1)
+	// 		}
+	// 	}
+	// 	ret = max(ret, dp[i])
+	// }
+
+	// return ret
 
 }
 
